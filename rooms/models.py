@@ -1,12 +1,32 @@
 from django.db import models
 from django_countries.fields import CountryField
-from core import models as core_model
+from core import models as core_models
 from users import models as user_models
 
 
-class Room(core_model.TimeStampedModel):
+class AbstractItem(core_models.TimeStampedModel):
 
-    """Custom Room Model"""
+    """Abstract Item Model Definition"""
+
+    name = models.CharField(max_length=140)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class RoomType(AbstractItem):
+
+    """Room Type Model Definition"""
+
+    pass
+
+
+class Room(core_models.TimeStampedModel):
+
+    """Room Model Definition"""
 
     name = models.CharField(max_length=140)
     description = models.TextField()
@@ -22,3 +42,7 @@ class Room(core_model.TimeStampedModel):
     check_out = models.TimeField()
     instant_book = models.BooleanField()
     host = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
+    room_type = models.ManyToManyField(RoomType, blank=True)
+
+    def __str__(self):
+        return self.name
