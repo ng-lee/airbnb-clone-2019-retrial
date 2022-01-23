@@ -11,7 +11,20 @@ class Conversation(core_models.TimeStampedModel):
     )
 
     def __str__(self):
-        return str(self.created)
+        all_participants = list(self.participants.all())
+        return ", ".join(all_participants)
+
+    def count_participants(self):
+        return self.participants.count()
+
+    count_participants.short_description = "Num of Participants"
+
+    def count_messages(self):
+        return self.messages.count()
+
+    count_messages.short_description = "Num of Messages"
+
+    
 
 
 class Message(core_models.TimeStampedModel):
