@@ -36,8 +36,3 @@ class ReviewAdmin(admin.ModelAdmin):
         "room",
         "average_rating",
     )
-
-    list_filter = (
-        "user",
-        "room",
-    )
