@@ -5,4 +5,39 @@ from . import models
 @admin.register(models.Review)
 class ReviewAdmin(admin.ModelAdmin):
 
-    pass
+    fieldsets = (
+        (
+            "Basic Info",
+            {
+                "fields": (
+                    "user",
+                    "room",
+                    "review",
+                )
+            },
+        ),
+        (
+            "Ratings",
+            {
+                "fields": (
+                    "accuracy",
+                    "communication",
+                    "cleanliness",
+                    "location",
+                    "check_in",
+                    "value",
+                )
+            },
+        ),
+    )
+
+    list_display = (
+        "user",
+        "room",
+        "average_rating",
+    )
+
+    list_filter = (
+        "user",
+        "room",
+    )
