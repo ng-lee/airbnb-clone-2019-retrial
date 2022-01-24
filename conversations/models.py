@@ -24,8 +24,6 @@ class Conversation(core_models.TimeStampedModel):
 
     count_messages.short_description = "Num of Messages"
 
-    
-
 
 class Message(core_models.TimeStampedModel):
 
