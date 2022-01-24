@@ -26,8 +26,17 @@ class PhotoAdmin(admin.ModelAdmin):
         return mark_safe(f"<img width='50px' src={obj.file.url} />")
 
 
+class PhotoInline(admin.TabularInline):
+
+    model = models.Photo
+
+
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
+
+    inlines = [
+        PhotoInline,
+    ]
 
     fieldsets = (
         (
@@ -114,6 +123,8 @@ class RoomAdmin(admin.ModelAdmin):
     )
 
     search_field = ("city", "host__username")
+
+    raw_id_fields = ("host",)
 
     filter_horizontal = (
         "amenities",
