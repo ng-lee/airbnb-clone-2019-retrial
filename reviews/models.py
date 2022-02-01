@@ -12,11 +12,11 @@ class Review(core_models.TimeStampedModel):
     RATING_FOUR = 4
     RATING_FIVE = 5
     RATING_CHOICES = (
-        (RATING_ONE, 1),
-        (RATING_TWO, 2),
-        (RATING_THREE, 3),
-        (RATING_FOUR, 4),
-        (RATING_FIVE, 5),
+        (RATING_ONE, "1"),
+        (RATING_TWO, "2"),
+        (RATING_THREE, "3"),
+        (RATING_FOUR, "4"),
+        (RATING_FIVE, "5"),
     )
 
     review = models.TextField()
