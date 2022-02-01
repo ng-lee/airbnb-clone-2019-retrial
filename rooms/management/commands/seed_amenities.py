@@ -28,4 +28,5 @@ class Command(BaseCommand):
         ]
         for a in amenities:
             room_models.Amenity.objects.create(name=a)
-        self.stdout.write(self.style.SUCCESS("Amenities created!"))
+        self.stdout.write(self.style.SUCCESS(f"{len(amenities)} amenities created!"))
+    
