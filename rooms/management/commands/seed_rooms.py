@@ -24,7 +24,7 @@ class Command(BaseCommand):
             room_models.Room,
             number,
             {
-                "name": seeder.faker.company(),
+                "name": lambda x: seeder.faker.address(),
                 "host": lambda x: random.choice(all_users),
                 "room_type": lambda x: random.choice(room_types),
                 "price": lambda x: random.randint(0, 300),
@@ -36,6 +36,9 @@ class Command(BaseCommand):
         )
         created = seeder.execute()
         cleaned = flatten(list(created.values()))
+        all_amenities = room_models.Amenity.objects.all()
+        all_facilities = room_models.Facility.objects.all()
+        all_house_rules = room_models.HouseRule.objects.all()
         for pk in cleaned:
             room = room_models.Room.objects.get(pk=pk)
             for _ in range(random.randint(5, 15)):
@@ -44,4 +47,16 @@ class Command(BaseCommand):
                     file=f"room_photos/{random.randint(0, 31)}.webp",
                     room=room,
                 )
+            for amenity in all_amenities:
+                trigger = random.randint(0, 10)
+                if trigger % 2:
+                    room.amenities.add(amenity)
+            for facility in all_facilities:
+                trigger = random.randint(0, 10)
+                if trigger % 2:
+                    room.facilities.add(facility)
+            for rule in all_house_rules:
+                trigger = random.randint(0, 10)
+                if trigger % 2:
+                    room.house_rules.add(rule)
         self.stdout.write(self.style.SUCCESS(f"{number} rooms created!"))
