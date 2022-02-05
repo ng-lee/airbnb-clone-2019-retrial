@@ -1,15 +1,12 @@
-from django.shortcuts import render
-from django.core.paginator import Paginator
+from django.views.generic import ListView
 from . import models as room_models
 
 
-def all_rooms(request):
-    page = request.GET.get("p", 1)
-    room_list = room_models.Room.objects.all()
-    paginator = Paginator(room_list, 10)
-    rooms = paginator.get_page(page)
-    return render(
-        request,
-        "home.html",
-        context={"rooms": rooms},
-    )
+class HomeView(ListView):
+
+    model = room_models.Room
+    page_kwarg = "p"
+    paginate_by = 10
+    paginate_orphans = 5
+    context_object_name = "rooms"
+    template_name = "home.html"
