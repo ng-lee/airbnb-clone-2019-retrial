@@ -29,6 +29,10 @@ def search(request):
     selected_beds = int(request.GET.get("beds", 0))
     selected_bedrooms = int(request.GET.get("bedrooms", 0))
     selected_baths = int(request.GET.get("baths", 0))
+    selected_instant_book = request.GET.get("instant_book", False)
+    selected_super_host = request.GET.get("super_host", False)
+    selected_amenities = request.GET.getlist("amenities")
+    selected_facilities = request.GET.getlist("facilities")
 
     selected = {
         "selected_city": selected_city,
@@ -39,6 +43,10 @@ def search(request):
         "selected_beds": selected_beds,
         "selected_bedrooms": selected_bedrooms,
         "selected_baths": selected_baths,
+        "selected_amenities": selected_amenities,
+        "selected_facilities": selected_facilities,
+        "selected_instant_book": selected_instant_book,
+        "selected_super_host": selected_super_host,
     }
 
     room_types = room_models.RoomType.objects.all()

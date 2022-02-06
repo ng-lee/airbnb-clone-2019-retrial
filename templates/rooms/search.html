@@ -9,7 +9,6 @@
     
 {% block content %}
     <h1>Search!</h1>
-    <h3>Searching by {{selected_city}}</h3>
 
     <form action="{% url 'rooms:search' %}">
         <div>
@@ -60,12 +59,20 @@
             <input type="number" placeholder="Baths" id="baths" name="baths" value="{{selected_baths}}">
         </div>
         <div>
+            <label for="instant_book">Instant Book Only</label>
+            <input type="checkbox" id="instant_book" name="instant_book" {% if selected_instant_book %}checked{% endif %}>
+        </div>
+        <div>
+            <label for="super_host">Super Host Only</label>
+            <input type="checkbox" id="super_host" name="super_host" {% if selected_super_host %}checked{% endif %}>
+        </div>
+        <div>
             <h3>Amenity</h3>
             <ul>
                 {% for a in amenities %}
                     <li>
                         <label for="amenity_{{a.pk}}">{{a.name}}</label>
-                        <input type="checkbox" id="amenity_{{a.pk}}" name="amenities">
+                        <input type="checkbox" id="amenity_{{a.pk}}" value="{{a.pk}}" name="amenities" {% if a.pk|slugify in selected_amenities %}checked{% endif %}>
                     </li>
                 {% endfor %}
             </ul>
@@ -76,7 +83,7 @@
                 {% for f in facilities %}
                     <li>
                         <label for="facility_{{f.pk}}">{{f.name}}</label>
-                        <input type="checkbox" id="facility_{{f.pk}}" name="facilities">
+                        <input type="checkbox" id="facility_{{f.pk}}" value="{{f.pk}}" name="facilities" {% if f.pk|slugify in selected_facilities %}checked{% endif %}>
                     </li>
                 {% endfor %}
             </ul>
