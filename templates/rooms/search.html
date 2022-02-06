@@ -39,23 +39,23 @@
             </select>
         </div>
         <div>
-            <label for="price">Price</label>
+            <label for="price">Maximum Price</label>
             <input type="number" placeholder="Price" id="price" name="price" value="{{selected_price}}">
         </div>
         <div>
-            <label for="guests">Guests</label>
+            <label for="guests">Mininum Guests</label>
             <input type="number" placeholder="Guests" id="guests" name="guests" value="{{selected_guests}}">
         </div>
         <div>
-            <label for="beds">Beds</label>
+            <label for="beds">Mininum Beds</label>
             <input type="number" placeholder="Beds" id="beds" name="beds" value="{{selected_beds}}">
         </div>
         <div>
-            <label for="bedrooms">Bedrooms</label>
+            <label for="bedrooms">Mininum Bedrooms</label>
             <input type="number" placeholder="Bedrooms" id="bedrooms" name="bedrooms" value="{{selected_bedrooms}}">
         </div>
         <div>
-            <label for="baths">Baths</label>
+            <label for="baths">Mininum Baths</label>
             <input type="number" placeholder="Baths" id="baths" name="baths" value="{{selected_baths}}">
         </div>
         <div>
@@ -63,8 +63,8 @@
             <input type="checkbox" id="instant_book" name="instant_book" {% if selected_instant_book %}checked{% endif %}>
         </div>
         <div>
-            <label for="super_host">Super Host Only</label>
-            <input type="checkbox" id="super_host" name="super_host" {% if selected_super_host %}checked{% endif %}>
+            <label for="superhost">Super Host Only</label>
+            <input type="checkbox" id="superhost" name="superhost" {% if selected_superhost %}checked{% endif %}>
         </div>
         <div>
             <h3>Amenity</h3>

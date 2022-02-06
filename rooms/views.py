@@ -29,8 +29,8 @@ def search(request):
     selected_beds = int(request.GET.get("beds", 0))
     selected_bedrooms = int(request.GET.get("bedrooms", 0))
     selected_baths = int(request.GET.get("baths", 0))
-    selected_instant_book = request.GET.get("instant_book", False)
-    selected_super_host = request.GET.get("super_host", False)
+    selected_instant_book = bool(request.GET.get("instant_book", False))
+    selected_superhost = bool(request.GET.get("superhost", False))
     selected_amenities = request.GET.getlist("amenities")
     selected_facilities = request.GET.getlist("facilities")
 
@@ -46,7 +46,7 @@ def search(request):
         "selected_amenities": selected_amenities,
         "selected_facilities": selected_facilities,
         "selected_instant_book": selected_instant_book,
-        "selected_super_host": selected_super_host,
+        "selected_superhost": selected_superhost,
     }
 
     room_types = room_models.RoomType.objects.all()
@@ -70,7 +70,36 @@ def search(request):
     if selected_room_type != 0:
         filter_args["room_type__pk"] = selected_room_type
 
+    if selected_price > 0:
+        filter_args["price__lte"] = selected_price
+
+    if selected_guests > 0:
+        filter_args["guests__gte"] = selected_guests
+
+    if selected_beds > 0:
+        filter_args["beds__gte"] = selected_beds
+
+    if selected_bedrooms > 0:
+        filter_args["bedrooms__gte"] = selected_bedrooms
+
+    if selected_baths > 0:
+        filter_args["baths__gte"] = selected_baths
+
+    if selected_instant_book:
+        filter_args["instant_book"] = True
+
+    if selected_superhost:
+        filter_args["superhost"] = True
+
     rooms = room_models.Room.objects.filter(**filter_args)
+
+    if len(selected_amenities) > 0:
+        for selected_amenity in selected_amenities:
+            rooms = rooms.filter(amenities__pk=int(selected_amenity))
+
+    if len(selected_facilities) > 0:
+        for selected_facility in selected_facilities:
+            rooms = rooms.filter(facilities__pk=int(selected_facility))
 
     return render(
         request,

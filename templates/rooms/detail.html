@@ -5,10 +5,26 @@
 {% endblock page_title %}
 
 {% block content %}
-
     <div>
         <h1>{{room.name}}</h1>
+        <h3>Host: {{room.host}}
+        {% if room.host.superhost %}
+            (superhost)
+        {% endif %}
+        </h3>
         <h3>{{room.description}}</h3>
+    </div>
+    <div>
+        <h5>Country</h5>
+        <span>{{room.country.name}}</span>
+    </div>
+    <div>
+        <h5>City</h5>
+        <span>{{room.city}}</span>
+    </div>
+    <div>
+        <h5>Address</h5>
+        <span>{{room.address}}</span>
     </div>
     <div>
         <h5>Amenities</h5>
@@ -36,3 +52,13 @@
     </div>
 
 {% endblock content %}
+
+
+{% comment %} guests
+beds
+bedrooms
+baths
+check_in
+check_out
+instant_book
+room_type {% endcomment %}
