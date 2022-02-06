@@ -12,8 +12,11 @@
 
     <form action="{% url 'rooms:search' %}">
         {{form.as_p}}
+        <button>Search</button>
     </form>
     <hr />
+    
+    {% if rooms %}
     <h2>Results</h2>
     <ul>
         {% for room in rooms %}
@@ -22,6 +25,7 @@
             </li>
         {% endfor %}
     </ul>
+    {% endif %}
 
 {% endblock content %}
     
