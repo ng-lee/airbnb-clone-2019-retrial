@@ -16,7 +16,7 @@
         <a href="?p={{page_obj.previous_page_number}}">Previous</a>
     {% endif %}
         
-    {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
     
     {% if page_obj.has_next %}
         <a href="?p={{page_obj.next_page_number}}">Next</a>
