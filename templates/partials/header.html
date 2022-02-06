@@ -2,7 +2,9 @@
     <nav>
         <ul>
             <li><a href="{% url 'core:home' %}">Home</a></li>
-            <li><a href="#">Nothing</a></li>
         </ul>
+        <form action="{% url 'rooms:search' %}">
+            <input type="text" name="city">
+        </form>
     </nav>
 </header>

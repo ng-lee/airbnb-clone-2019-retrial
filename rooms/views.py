@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from . import models as room_models
 
@@ -16,3 +17,9 @@ class RoomDetailView(DetailView):
 
     model = room_models.Room
     template_name = "rooms/detail.html"
+
+
+def search(request):
+    city = request.GET.get("city")
+    city = str.capitalize(city)
+    return render(request, "rooms/search.html", context={"city": city})
