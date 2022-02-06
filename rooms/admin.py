@@ -74,6 +74,7 @@ class RoomAdmin(admin.ModelAdmin):
             "Spaces",
             {
                 "fields": (
+                    "room_type",
                     "guests",
                     "beds",
                     "bedrooms",
