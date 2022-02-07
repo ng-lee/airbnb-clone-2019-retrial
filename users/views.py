@@ -35,7 +35,7 @@ class SignupView(FormView):
     form_class = forms.SignupForm
 
     def form_valid(self, form):
-        form.create_user()
+        form.save()
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         user = authenticate(self.request, username=username, password=password)
