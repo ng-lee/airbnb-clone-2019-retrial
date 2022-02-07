@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-    Log In
+    Sign Up
 {% endblock page_title %}
 
 {% block search_bar %}
@@ -12,7 +12,7 @@
     <form method="POST">
         {% csrf_token %}
         {{form.as_p}}
-        <button>Log In</button>
+        <button>Sign Up</button>
     </form>
 
 {% endblock content %}
