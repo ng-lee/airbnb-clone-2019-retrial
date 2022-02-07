@@ -2,5 +2,10 @@
     <ul>
         <li><a href="{% url 'core:home' %}">Home</a></li>
         <li><a href="{% url 'rooms:search' %}">Search</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'users:logout' %}">Log Out</a></li>
+        {% else %}
+        <li><a href="{% url 'users:login' %}">Log In</a></li>
+        {% endif %}
     </ul>
 </nav>
