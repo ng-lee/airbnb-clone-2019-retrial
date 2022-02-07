@@ -31,5 +31,14 @@ def logout_view(request):
 class SignupView(FormView):
 
     template_name = "users/signup.html"
-    success_url = reverse_lazy("users:login")
+    success_url = reverse_lazy("core:home")
     form_class = forms.SignupForm
+
+    def form_valid(self, form):
+        form.create_user()
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(self.request, username=username, password=password)
+        if user is not None:
+            login(self.request, user)
+        return super().form_valid(form)
