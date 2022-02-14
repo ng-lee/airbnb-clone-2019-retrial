@@ -32,6 +32,16 @@ class User(AbstractUser):
         (CURRENCY_KRW, "KRW"),
     )
 
+    LOGIN_EMAIL = "email"
+    LOGIN_GITHUB = "github"
+    LOGIN_KAKAO = "kakao"
+
+    LOGIN_CHOICES = (
+        (LOGIN_EMAIL, "Email"),
+        (LOGIN_GITHUB, "Github"),
+        (LOGIN_KAKAO, "Kakao"),
+    )
+
     avatar = models.ImageField(upload_to="avatars", blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     bio = models.TextField(default="", blank=True)
@@ -39,3 +49,6 @@ class User(AbstractUser):
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=10, blank=True)
     currency = models.CharField(choices=CURRENCY_CHOICES, max_length=10, blank=True)
     superhost = models.BooleanField(default=False)
+    login_method = models.CharField(
+        choices=LOGIN_CHOICES, max_length=10, default=LOGIN_EMAIL
+    )
