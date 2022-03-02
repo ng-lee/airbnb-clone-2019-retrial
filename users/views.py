@@ -125,6 +125,43 @@ class KakaoException(Exception):
 
 def kakao_callback(request):
     try:
-        pass
+        code = request.GET.get("code")
+        client_id = os.environ.get("KAKAO_ID")
+        redirect_uri = "http://127.0.0.1:8000/users/login/kakao/callback"
+        token_request = requests.get(
+            f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}"
+        )
+        token_json = token_request.json()
+        error = token_json.get("error", None)
+        if error is not None:
+            raise KakaoException
+        else:
+            access_token = token_json.get("access_token")
+            profile_request = requests.get(
+                "https://kapi.kakao.com/v2/user/me",
+                headers={"Authorization": f"Bearer {access_token}"},
+            )
+            profile_json = profile_request.json()
+            kakao_account = profile_json.get("kakao_account", None)
+            if kakao_account is None:
+                raise KakaoException
+            email = kakao_account.get("email")
+            profile_image = kakao_account.get("profile").get("profile_image_url")
+            nickname = kakao_account.get("profile").get("nickname")
+            try:
+                user = models.User.objects.get(username=email)
+                if user.login_method != models.User.LOGIN_KAKAO:
+                    raise KakaoException
+            except models.User.DoesNotExist:
+                user = models.User.objects.create(
+                    username=email,
+                    first_name=nickname,
+                    email=email,
+                    login_method=models.User.LOGIN_KAKAO,
+                )
+                user.set_unusable_password()
+                user.save()
+            login(request, user)
+            return redirect(reverse("core:home"))
     except KakaoException:
         return redirect(reverse("users:login"))
