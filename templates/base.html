@@ -11,8 +11,10 @@
 <body>
     {% include 'partials/header.html' %}
     
-    {% block content %}
-    {% endblock content %}
+    <main class="mt-32">
+        {% block content %}
+        {% endblock content %}
+    </main>
 
     {% include 'partials/footer.html' %}
 </body>
