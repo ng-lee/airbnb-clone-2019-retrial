@@ -15,11 +15,17 @@
         
             {% include 'partials/social_login.html' %}
 
-            <form method="POST">
+            <form method="POST" class="w-72">
                 {% csrf_token %}
-                {{form.as_p}}
-                <button>Log In</button>
+                <input type="text" placeholder="Username" class="input-box mb-1">
+                <input type="password" placeholder="Password" class="input-box">
+                <button class="btn bg-airbnb-pink text-white mt-5">Log In</button>
             </form>
+
+            <div class="mt-5">
+                <span>Don't have an account?</span>
+                <a href="{% url 'users:signup' %}" class="text-airbnb-green font-bold">Sign Up</a>
+            </div>
 
         </div>
     

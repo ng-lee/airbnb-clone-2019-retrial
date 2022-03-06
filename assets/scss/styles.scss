@@ -1,5 +1,15 @@
 @tailwind base;
 @tailwind components;
+.btn {
+  @apply px-5 py-2 w-full h-16 flex items-center justify-center font-bold;
+}
+.input-box {
+  @apply px-5 py-2 w-full h-16 flex items-center justify-center font-bold text-gray-500 border-2;
+  &:focus {
+    @apply outline-none border-airbnb-green;
+  }
+}
+
 @tailwind utilities;
 
 .side-padding {
