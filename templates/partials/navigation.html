@@ -1,11 +1,11 @@
 <nav>
     <ul class="flex font-bold text-sm">
-        <li class="ml-6"><a href="{% url 'rooms:search' %}">Search</a></li>
+        <li class="ml-6 hover:text-red-500"><a href="{% url 'rooms:search' %}">Search</a></li>
         {% if user.is_authenticated %}
-        <li class="ml-6"><a href="{% url 'users:logout' %}">Log Out</a></li>
+        <li class="ml-6 hover:text-red-500"><a href="{% url 'users:logout' %}">Log Out</a></li>
         {% else %}
-        <li class="ml-6"><a href="{% url 'users:signup' %}">Sign Up</a></li>
-        <li class="ml-6"><a href="{% url 'users:login' %}">Log In</a></li>
+        <li class="ml-6 hover:text-red-500"><a href="{% url 'users:signup' %}">Sign Up</a></li>
+        <li class="ml-6 hover:text-red-500"><a href="{% url 'users:login' %}">Log In</a></li>
         {% endif %}
     </ul>
 </nav>
