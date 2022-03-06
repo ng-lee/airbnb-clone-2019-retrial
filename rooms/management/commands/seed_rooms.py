@@ -44,7 +44,7 @@ class Command(BaseCommand):
             for _ in range(random.randint(5, 15)):
                 room_models.Photo.objects.create(
                     caption=seeder.faker.sentence(),
-                    file=f"room_photos/{random.randint(0, 31)}.webp",
+                    file=f"room_photos/{random.randint(1, 31)}.webp",
                     room=room,
                 )
             for amenity in all_amenities:
