@@ -8,25 +8,12 @@
 
     <div class="w-full h-50vh bg-cover bg-center" style="background-image:url(https://images.unsplash.com/photo-1562516354-276afcce3e96?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1426&q=80);"></div>
     
-    <div class="container mx-auto grid grid-cols-4 gap-5 px-20 mt-20">
+    <div class="container mx-auto grid grid-cols-4 gap-x-5 gap-y-10 px-20 mt-20">
         {% for room in rooms %}
             {% include 'partials/room_card.html' with room=room %}
         {% endfor %}
     </div>
 
-
-    <h5>
-    
-    {% if page_obj.has_previous %}
-        <a href="?p={{page_obj.previous_page_number}}">Previous</a>
-    {% endif %}
-        
-    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
-    
-    {% if page_obj.has_next %}
-        <a href="?p={{page_obj.next_page_number}}">Next</a>
-    {% endif %}
-        
-    </h5>
+    {% include 'partials/pagination.html' with page_obj=page_obj %}
 
 {% endblock content %}
