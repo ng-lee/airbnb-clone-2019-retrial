@@ -9,12 +9,20 @@
     
 {% block content %}
 
-    {% include 'partials/social_login.html' %}
+    <div class="side-padding">
 
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button>Log In</button>
-    </form>
+        <div class="border border-gray-300 py-10 flex flex-col items-center justify-center">
+        
+            {% include 'partials/social_login.html' %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button>Log In</button>
+            </form>
+
+        </div>
+    
+    </div>
 
 {% endblock content %}
