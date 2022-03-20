@@ -1,6 +1,6 @@
 <a class="w-full" href="{% url 'rooms:detail' room.pk %}">
     <div class="w-full h-48 bg-cover bg-center rounded-xl" style="background-image:url({{room.get_first_photo}});"></div>
-    <div class="mt-2">
+    <div class="mt-1">
         <div class="flex justify-between items-center">
             <div class="flex items-center">
                 {% if room.host.superhost %}

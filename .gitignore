@@ -153,3 +153,4 @@ cython_debug/
 
 uploads/
 node_modules/
+migrations/

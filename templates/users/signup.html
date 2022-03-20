@@ -15,11 +15,70 @@
 
             {% include 'partials/social_login.html' %}
 
-            <form method="POST">
+            <form method="POST" class="w-72">
                 {% csrf_token %}
-                {{form.as_p}}
-                <button>Sign Up</button>
+                <div class="mb-1 {% if form.username.errors %}has_errors{% endif %}">
+                    <input type="text" name="username" placeholder="Username" class="input-box">
+                    {% if form.username.errors %}
+                        
+                        {% for e in form.username.errors %}
+                            <span class="text-red-700 font-bold text-sm">{{e}}</span>
+                        {% endfor %}
+                            
+                    {% endif %}
+                </div>
+
+                <div class="mb-1 {% if form.first_name.errors %}has_errors{% endif %}">
+                    <input type="text" name="first_name" placeholder="First Name" class="input-box">
+                    {% if form.first_name.errors %}
+                        
+                        {% for e in form.first_name.errors %}
+                            <span class="text-red-700 font-bold text-sm">{{e}}</span>
+                        {% endfor %}
+                            
+                    {% endif %}
+                </div>
+                
+                <div class="mb-1 {% if form.last_name.errors %}has_errors{% endif %}">
+                    <input type="text" name="last_name" placeholder="Last Name" class="input-box">
+                    {% if form.last_name.errors %}
+                        
+                        {% for e in form.last_name.errors %}
+                            <span class="text-red-700 font-bold text-sm">{{e}}</span>
+                        {% endfor %}
+                            
+                    {% endif %}
+                </div>
+                
+                <div class="mb-1 {% if form.password.errors %}has_errors{% endif %}">
+                    <input type="password" name="password" placeholder="Password" class="input-box">
+                    {% if form.password.errors %}
+                        
+                        {% for e in form.password.errors %}
+                            <span class="text-red-700 font-bold text-sm">{{e}}</span>
+                        {% endfor %}
+                            
+                    {% endif %}
+                </div>
+                
+                <div class="{% if form.password1.errors %}has_errors{% endif %}">
+                    <input type="password" name="password1" placeholder="Confirm Password" class="input-box">
+                    {% if form.password1.errors %}
+                        
+                        {% for e in form.password1.errors %}
+                            <span class="text-red-700 font-bold text-sm">{{e}}</span>
+                        {% endfor %}
+                            
+                    {% endif %}
+                </div>
+                
+                <button class="btn bg-airbnb-pink text-white mt-5">Sign Up</button>
             </form>
+
+            <div class="mt-5">
+                <span>Have an account?</span>
+                <a href="{% url 'users:login' %}" class="text-airbnb-green font-bold underline">Log In</a>
+            </div>
 
         </div>
 
