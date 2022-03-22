@@ -9,10 +9,27 @@
 .link {
   @apply text-airbnb-green font-bold underline;
 }
-.input-box {
-  @apply px-5 py-2 w-full h-16 flex items-center justify-center font-light text-sm text-gray-500 border-2;
+.input {
+  @apply text-gray-500 border-2 box-border px-5 py-2;
+  input:not([type="checkbox"]) {
+    @apply w-full h-full flex items-center justify-center font-light text-sm;
+    &:focus {
+      @apply outline-none;
+    }
+  }
+  input[type="text"],
+  input[type="password"] {
+    @apply h-12;
+  }
+  textarea,
+  select {
+    @apply w-full h-full;
+    &:focus {
+      @apply outline-none;
+    }
+  }
   &:focus {
-    @apply outline-none border-airbnb-green;
+    @apply border-airbnb-green;
   }
 }
 .has_errors {

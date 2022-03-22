@@ -15,19 +15,28 @@
         
             {% include 'partials/social_login.html' %}
 
-            <form method="POST" class="w-72">
+            {% csrf_token %}
+
+            <form method="POST" class="w-72" enctype="multipart/form-data">
                 {% csrf_token %}
-
+                
                 {% if form.non_field_errors %}
-                    
-                    {% for e in form.non_field_errors %}
-                        <div>{{e}}</div>
+                    {% for error in form.non_field_errors %}
+                        <span class="text-red-700 font-medium text-sm">{{error}}</span> 
                     {% endfor %}
-                        
                 {% endif %}
-
-                <input type="text" name="username" placeholder="Username" class="input-box mb-1">
-                <input type="password" name="password" placeholder="Password" class="input-box">
+                
+                {% for field in form %}
+                    <div class="input mb-1 {% if field.errors %}has_error{% endif %}">
+                        {{field}}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <span class="text-red-700 font-medium text-sm">{{error}}</span> 
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                
                 <button class="btn bg-airbnb-pink text-white mt-5">Log In</button>
             </form>
 

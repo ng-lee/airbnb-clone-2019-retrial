@@ -25,7 +25,7 @@
             <div class="mt-3 text-gray-400 text-lg">{{user_obj.bio}}</div>
             
             {% if user == user_obj %}
-                <a href="#" class="bnt-link mt-5">Edit Profile</a>
+                <a href="{% url 'users:update-profile' %}" class="bnt-link mt-5">Edit Profile</a>
             {% endif %}
 
         </div>
