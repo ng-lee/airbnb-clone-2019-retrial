@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block page_title %}
-    {{user.username}}'s Profile
+    {{user_obj.username}}'s Profile
 {% endblock page_title %}
 
 {% block search_bar %}
@@ -12,8 +12,22 @@
     <div class="side-padding">
 
         <div class="border border-gray-300 py-10 flex flex-col items-center justify-center">
+
+            
+            {% if user_obj.avatar %}
+                <div class="w-32 h-32 rounded-full bg-cover bg-center" style="background-image: url({{user_obj.avatar.url}})">
+            {% else %}
+                <div class="w-32 h-32 rounded-full bg-gray-500 flex justify-center items-center">
+                    <span class="text-white text-5xl font-bold">{{user_obj.first_name | first}}</span>
+            {% endif %}
+                </div>
         
-            {{user_obj.first_name}}
+            <div class="flex items-center mt-4">
+                <span class="text-3xl">{{user_obj.last_name}}, {{user_obj.first_name}}</span>
+                {% if user_obj.superhost %}
+                    <i class="fa-solid fa-circle-check text-airbnb-green ml-1"></i>
+                {% endif %}
+            </div>
 
         </div>
     
