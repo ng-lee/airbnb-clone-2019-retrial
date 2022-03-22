@@ -5,51 +5,20 @@
 {% endblock page_title %}
 
 {% block content %}
-    <div>
-        <h1>{{room.name}}</h1>
-        <h3>Host: <a href="{{room.host.get_absolute_url}}" class="link">{{room.host}}</a>
-        {% if room.host.superhost %}
-            (superhost)
-        {% endif %}
-        </h3>
-        <h3>{{room.description}}</h3>
+   
+    <div class="w-full h-50vh grid grid-cols-4 grid-rows-2 gap-0.5 bg-gray-500">
+        <div class="bg-cover bg-center col-start-1 col-end-3 row-start-1 row-end-3" style="background-image:url({{room.get_first_photo}})"></div>
+
+        {% for photo in room.get_next_four_photo %}
+            <div class="bg-cover bg-center" style="background-image:url({{photo.file.url}})"></div>
+        {% endfor %}
+            
     </div>
-    <div>
-        <h5>Country</h5>
-        <span>{{room.country.name}}</span>
-    </div>
-    <div>
-        <h5>City</h5>
-        <span>{{room.city}}</span>
-    </div>
-    <div>
-        <h5>Address</h5>
-        <span>{{room.address}}</span>
-    </div>
-    <div>
-        <h5>Amenities</h5>
-        <ul>
-            {% for a in room.amenities.all %}
-                <li>{{a}}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div>
-        <h5>Facilites</h5>
-        <ul>
-            {% for f in room.facilities.all %}
-                <li>{{f}}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div>
-        <h5>House Rules</h5>
-        <ul>
-            {% for r in room.house_rules.all %}
-                <li>{{r}}</li>
-            {% endfor %}
-        </ul>
-    </div>
+
+   <div>
+   
+   
+   </div>
 
 {% endblock content %}
 
