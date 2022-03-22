@@ -66,7 +66,9 @@
     @apply bg-yellow-400;
   }
 }
-
+.border-section {
+  @apply pb-10 mb-10 border-b border-gray-300;
+}
 @tailwind utilities;
 .side-padding {
   @apply px-20;

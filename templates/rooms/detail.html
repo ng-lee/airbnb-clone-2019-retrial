@@ -18,12 +18,13 @@
         </div>
 
    
-        <div class="side-padding mt-10">
-            <div class="w-2/3 flex flex-col items-center">
+        <div class="px-40 mt-10">
+            <div class="w-2/3 flex flex-col">
                 <div class="w-full flex items-center justify-between">
                     <div>
-                        <h4 class="font-bold text-3xl">{{room.name}}</h4>
+                        <h4 class="font-bold text-3xl mb-2">{{room.name}}</h4>
                         <span>{{room.city}}</span>
+                        
                     </div>
                     <a href="{{room.host.get_absolute_url}}" class="flex flex-col items-center">
 
@@ -32,21 +33,50 @@
                     
                     </a>
                 </div>
-            
-            
+                <div class="mt-10 border-section">
+                    <span class="mr-3 text-gray-500">{{room.room_type}}</span>
+                    <span class="mr-3 text-gray-500">{{room.guests}} guest{{room.guests | pluralize}}</span>
+                    <span class="mr-3 text-gray-500">{{room.beds}} bed{{room.beds | pluralize}}</span>
+                    <span class="mr-3 text-gray-500">{{room.bedrooms}} bedroom{{room.bedrooms | pluralize}}</span>
+                    <span class="mr-3 text-gray-500">{{room.baths}} bath{{room.baths | pluralize}}</span>
+                </div>
+                <p class="border-section text-lg">
+                    {{room.description}}
+                </p>
+                <div class="border-section">
+                    <h2 class="font-bold mb-5">Amenities</h2>
+
+                    {% for a in room.amenities.all %}
+                        <li class="text-gray-500 mb-2">{{a}}</li>
+                    {% endfor %}
+                </div>
+                 <div class="border-section">
+                    <h2 class="font-bold mb-5">Facilities</h2>
+                    
+                    {% for a in room.facilities.all %}
+                        <li class="text-gray-500 mb-2">{{a}}</li>
+                    {% endfor %}
+                </div>
+                 <div class="border-section">
+                    <h2 class="font-bold mb-5">House Rules</h2>
+                    
+                    {% for a in room.house_rules.all %}
+                        <li class="text-gray-500 mb-2">{{a}}</li>
+                    {% endfor %}
+                </div>
+                <div class="border-section">
+                    <h4 class="font-bold text-2xl mb-5">Reviews</h4>
+                    <div class="flex">
+                        <div class="mr-5 text-lg">
+                            <i class="fas fa-star text-airbnb-pink"></i>
+                            <span>{{room.total_rating}}</span>
+                        </div>
+                        <span class="text-lg">{{room.reviews.count}} review{{room.reviews.count | pluralize}}</span>
+                    </div>
+                </div>
             </div>
         </div>
    
    </div>
 
 {% endblock content %}
-
-
-{% comment %} guests
-beds
-bedrooms
-baths
-check_in
-check_out
-instant_book
-room_type {% endcomment %}
