@@ -1,0 +1,7 @@
+{% if user.avatar %}
+    <div class="w-32 h-32 rounded-full bg-cover bg-center" style="background-image: url({{user.avatar.url}})">
+{% else %}
+    <div class="w-32 h-32 rounded-full bg-gray-500 flex justify-center items-center">
+        <span class="text-white text-5xl font-bold">{{user.first_name | first}}</span>
+{% endif %}
+    </div>

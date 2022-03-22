@@ -7,7 +7,7 @@
 {% block content %}
     <div>
         <h1>{{room.name}}</h1>
-        <h3>Host: <a href="{{room.host.get_absolute_url}}">{{room.host}}</a>
+        <h3>Host: <a href="{{room.host.get_absolute_url}}" class="link">{{room.host}}</a>
         {% if room.host.superhost %}
             (superhost)
         {% endif %}
