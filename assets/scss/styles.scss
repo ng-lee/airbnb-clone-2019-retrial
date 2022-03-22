@@ -4,7 +4,7 @@
   @apply px-5 py-2 w-full h-16 flex items-center justify-center font-bold;
 }
 .btn-link {
-  @apply border-2 border-airbnb-pink text-airbnb-pink px-5 py-2 font-bold rounded-xl;
+  @apply border-2 border-airbnb-pink text-airbnb-pink px-5 py-2 font-bold rounded-xl text-center;
 }
 .link {
   @apply text-airbnb-green font-bold underline;

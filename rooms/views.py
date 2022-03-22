@@ -1,5 +1,7 @@
+from django.http import Http404
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, UpdateView
+from users import mixins as user_mixins
 from . import models, forms
 
 
@@ -87,7 +89,7 @@ def search(request):
     return render(request, "rooms/search.html", context={"form": form, "rooms": rooms})
 
 
-class EditRoomView(UpdateView):
+class EditRoomView(user_mixins.LoggedInOnlyView, UpdateView):
 
     model = models.Room
     template_name = "rooms/edit-room.html"
@@ -110,3 +112,21 @@ class EditRoomView(UpdateView):
         "facilities",
         "house_rules",
     )
+
+    def get_object(self, queryset=None):
+        room = super().get_object(queryset)
+        if room.host.pk != self.request.user.pk:
+            raise Http404()
+        return room
+
+
+class EditPhotosView(user_mixins.LoggedInOnlyView, DetailView):
+
+    model = models.Room
+    template_name = "rooms/edit-photos.html"
+
+    def get_object(self, queryset=None):
+        room = super().get_object(queryset)
+        if room.host.pk != self.request.user.pk:
+            raise Http404()
+        return room
