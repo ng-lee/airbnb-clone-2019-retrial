@@ -13,7 +13,7 @@
 
         <div class="border border-gray-300 py-10 flex flex-col items-center justify-center">
 
-            {% include 'mixins/profile-avatar.html' with user=user_obj %}
+            {% include 'mixins/profile-avatar.html' with user=user_obj width="w-28" height="h-28" size="text-5xl" %}
         
             <div class="flex items-center mt-4">
                 <span class="text-3xl">{{user_obj.last_name}}, {{user_obj.first_name}}</span>

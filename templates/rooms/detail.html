@@ -6,17 +6,36 @@
 
 {% block content %}
    
-    <div class="w-full h-50vh grid grid-cols-4 grid-rows-2 gap-0.5 bg-gray-500">
-        <div class="bg-cover bg-center col-start-1 col-end-3 row-start-1 row-end-3" style="background-image:url({{room.get_first_photo}})"></div>
+    <div class="container side-padding">
 
-        {% for photo in room.get_next_four_photo %}
-            <div class="bg-cover bg-center" style="background-image:url({{photo.file.url}})"></div>
-        {% endfor %}
-            
-    </div>
+        <div class="w-full h-50vh grid grid-cols-4 grid-rows-2 gap-0.5 ">
+            <div class="bg-cover bg-center col-start-1 col-end-3 row-start-1 row-end-3" style="background-image:url({{room.get_first_photo}})"></div>
 
-   <div>
+            {% for photo in room.get_next_four_photo %}
+                <div class="bg-cover bg-center" style="background-image:url({{photo.file.url}})"></div>
+            {% endfor %}
+                
+        </div>
+
    
+        <div class="side-padding mt-10">
+            <div class="w-2/3 flex flex-col items-center">
+                <div class="w-full flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-3xl">{{room.name}}</h4>
+                        <span>{{room.city}}</span>
+                    </div>
+                    <a href="{{room.host.get_absolute_url}}" class="flex flex-col items-center">
+
+                        {% include 'mixins/profile-avatar.html' with user=room.host width="w-16" height="h-16" size="text-2xl" %}
+                        <span class="text-gray-500">{{room.host.username}}</span>
+                    
+                    </a>
+                </div>
+            
+            
+            </div>
+        </div>
    
    </div>
 
