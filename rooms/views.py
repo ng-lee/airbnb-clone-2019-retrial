@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from . import models as room_models, forms
+from django.views.generic import ListView, DetailView, UpdateView
+from . import models, forms
 
 
 class HomeView(ListView):
 
-    model = room_models.Room
+    model = models.Room
     page_kwarg = "p"
     paginate_by = 12
     paginate_orphans = 5
@@ -15,7 +15,7 @@ class HomeView(ListView):
 
 class RoomDetailView(DetailView):
 
-    model = room_models.Room
+    model = models.Room
     template_name = "rooms/detail.html"
 
 
@@ -72,7 +72,7 @@ def search(request):
             if superhost is True:
                 filter_args["host__superhost"] = True
 
-            rooms = room_models.Room.objects.filter(**filter_args)
+            rooms = models.Room.objects.filter(**filter_args)
 
             for amenity in amenities:
                 rooms = rooms.filter(amenities=amenity)
@@ -85,3 +85,28 @@ def search(request):
         form = forms.SearchForm()
 
     return render(request, "rooms/search.html", context={"form": form, "rooms": rooms})
+
+
+class EditRoomView(UpdateView):
+
+    model = models.Room
+    template_name = "rooms/edit-room.html"
+    fields = (
+        "name",
+        "description",
+        "country",
+        "city",
+        "price",
+        "address",
+        "guests",
+        "beds",
+        "bedrooms",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+        "room_type",
+        "amenities",
+        "facilities",
+        "house_rules",
+    )
