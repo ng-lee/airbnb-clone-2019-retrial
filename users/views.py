@@ -51,6 +51,11 @@ class SignupView(FormView):
             messages.success(self.request, f"Welcome, {user.username}")
         return super().form_valid(form)
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields["password1"].label = "Password Confirmation"
+        return form
+
 
 def github_login(request):
     client_id = os.environ.get("GH_ID")

@@ -8,6 +8,7 @@
     {% endif %}
 
     {% for field in form %}
+        <span class="text-gray-500">{{field.label | title}}</span>
         <div class="input mb-1 {% if field.errors %}has_error{% endif %}">
             {{field}}
             {% if field.errors %}
