@@ -8,10 +8,10 @@ from django.core.files.base import ContentFile
 from django.views import View
 from django.views.generic import FormView, DetailView, UpdateView
 from django.contrib.auth.views import PasswordChangeView
-from . import forms, models
+from . import forms, models, mixins
 
 
-class LoginView(View):
+class LoginView(mixins.LoggedOutOnlyView, View):
     def get(self, request):
         form = forms.LoginForm()
         return render(request, "users/login.html", context={"form": form})
@@ -35,7 +35,7 @@ def logout_view(request):
     return redirect(reverse("core:home"))
 
 
-class SignupView(FormView):
+class SignupView(mixins.LoggedOutOnlyView, FormView):
 
     template_name = "users/signup.html"
     success_url = reverse_lazy("core:home")
@@ -215,7 +215,13 @@ class UpdateProfileView(UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()
+
 
 class UpdatePasswordView(PasswordChangeView):
 
     template_name = "users/update-password.html"
+
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()
