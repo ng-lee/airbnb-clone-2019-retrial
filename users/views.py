@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.views import View
 from django.views.generic import FormView, DetailView, UpdateView
+from django.contrib.auth.views import PasswordChangeView
 from . import forms, models
 
 
@@ -197,6 +198,7 @@ class UpdateProfileView(UpdateView):
         "first_name",
         "last_name",
         "username",
+        "email",
         "avatar",
         "gender",
         "bio",
@@ -207,3 +209,8 @@ class UpdateProfileView(UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class UpdatePasswordView(PasswordChangeView):
+
+    template_name = "users/update-password.html"

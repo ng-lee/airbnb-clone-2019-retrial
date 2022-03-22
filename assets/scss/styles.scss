@@ -3,7 +3,7 @@
 .btn {
   @apply px-5 py-2 w-full h-16 flex items-center justify-center font-bold;
 }
-.bnt-link {
+.btn-link {
   @apply border-2 border-airbnb-pink text-airbnb-pink px-5 py-2 font-bold rounded-xl;
 }
 .link {
@@ -12,14 +12,10 @@
 .input {
   @apply text-gray-500 border-2 box-border px-5 py-2;
   input:not([type="checkbox"]) {
-    @apply w-full h-full flex items-center justify-center font-light text-sm;
+    @apply w-full h-12 flex items-center justify-center font-light text-sm;
     &:focus {
       @apply outline-none;
     }
-  }
-  input[type="text"],
-  input[type="password"] {
-    @apply h-12;
   }
   textarea,
   select {

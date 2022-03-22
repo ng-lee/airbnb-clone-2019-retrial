@@ -13,4 +13,7 @@ urlpatterns = [
     path("signup/", views.SignupView.as_view(), name="signup"),
     path("<int:pk>/", views.ProfileView.as_view(), name="profile"),
     path("update-profile/", views.UpdateProfileView.as_view(), name="update-profile"),
+    path(
+        "update-password/", views.UpdatePasswordView.as_view(), name="update-password"
+    ),
 ]
