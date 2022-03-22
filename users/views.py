@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 from . import forms, models
 
 
@@ -181,3 +181,9 @@ def kakao_callback(request):
     except KakaoException as e:
         messages.error(request, e)
         return redirect(reverse("users:login"))
+
+
+class ProfileView(DetailView):
+
+    model = models.User
+    context_object_name = "user_obj"
