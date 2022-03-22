@@ -195,7 +195,7 @@ class ProfileView(DetailView):
     context_object_name = "user_obj"
 
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(mixins.LoggedInOnlyView, UpdateView):
 
     model = models.User
     template_name = "users/update-profile.html"
@@ -219,7 +219,9 @@ class UpdateProfileView(UpdateView):
         return self.request.user.get_absolute_url()
 
 
-class UpdatePasswordView(PasswordChangeView):
+class UpdatePasswordView(
+    mixins.EmailLoginOnlyView, mixins.LoggedInOnlyView, PasswordChangeView
+):
 
     template_name = "users/update-password.html"
 
