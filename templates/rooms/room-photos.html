@@ -11,18 +11,22 @@
 
     <div class="px-80">
 
-        {% for photo in room.photos.all %}
-            <div class="border border-gray-300 py-5 px-5 flex items-center justify-between mb-5">
-                <div class="flex">
-                    <img src="{{photo.file.url}}" class="w-32 mr-5">
-                    <span>{{photo.caption}}</span>
+        <a href="{% url 'rooms:upload' room.pk %}" class="btn-link">Upload Photo</a>
+
+        <div class="mt-10">
+            {% for photo in room.photos.all %}
+                <div class="border border-gray-300 py-5 px-5 flex items-center justify-between mb-5">
+                    <div class="flex">
+                        <img src="{{photo.file.url}}" class="w-32 mr-5">
+                        <span>{{photo.caption}}</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <a href="{% url 'rooms:edit-photo' room.pk photo.pk %}" class="btn-link text-green-400 border-green-400 mb-3">Edit</a>
+                        <a href="{% url 'rooms:delete-photo' room.pk photo.pk %}" class="btn-link text-red-600 border-red-600">Delete</a>
+                    </div>
                 </div>
-                <div class="flex flex-col">
-                    <a href="{% url 'rooms:edit-photo' room.pk photo.pk %}" class="btn-link text-green-400 border-green-400 mb-3">Edit</a>
-                    <a href="{% url 'rooms:delete-photo' room.pk photo.pk %}" class="btn-link text-red-600 border-red-600">Delete</a>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
 
     </div>
 
